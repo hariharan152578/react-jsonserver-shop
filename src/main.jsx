@@ -1,25 +1,29 @@
+// main.jsx or index.jsx
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './App.jsx';
 import { ViewStory } from './ViewStory.jsx';
-import {Search} from './Search.jsx'
-const router = createBrowserRouter([
+
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+    },
+    {
+      path: '/story/:id/:tot',
+      element: <ViewStory />,
+    },
+  ],
   {
-    path: '/',
-    element: <App/>
-  },
-  {
-    path: '/story/:id/:tot',
-    element: <ViewStory />
+    basename: '/react-jsonserver-shop',
   }
-]);
+);
 
 createRoot(document.getElementById('root')).render(
-<BrowserRouter basename="/react-jsonserver-shop">
-  <App />
-</BrowserRouter>
-
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
 );
